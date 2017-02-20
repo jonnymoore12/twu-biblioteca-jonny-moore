@@ -7,6 +7,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         bibliotecaApp.run();
+        bibliotecaApp.listBooks();
     }
 
     public void run() {
@@ -15,10 +16,23 @@ public class BibliotecaApp {
 
     public void listBooks() {
 
+        printBookDetailsColumns();
+
         for (Book book : library.getBooks()) {
-            System.out.print(book.getTitle());
-            System.out.print(book.getAuthor());
-            System.out.print(book.getYear());
+            printBookInfo(book);
         }
+    }
+
+    private void printBookDetailsColumns() {
+        spaceContentAcrossRow("Title", "Author", "Year");
+        spaceContentAcrossRow("-----", "------", "----");
+    }
+
+    private void printBookInfo(Book book) {
+        spaceContentAcrossRow(book.getTitle(), book.getAuthor(), book.getYear());
+    }
+
+    private void spaceContentAcrossRow(String column1, String column2, String column3) {
+        System.out.printf("%-20s %-20s %10s %n", column1, column2, column3);
     }
 }
