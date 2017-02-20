@@ -9,23 +9,21 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         bibliotecaApp.run();
-        bibliotecaApp.listBooks();
+
     }
 
     public void run() {
         System.out.println("Welcome to Biblioteca!");
+        BibliotecaApp.displayMenu();
     }
 
-    public void displayMenu() {
-//        Scanner reader = new Scanner(System.in);
-//        System.out.println("Please choose from the following options (type the corresponding number)");
-//        String userInput = reader.next();
-
+    public static void displayMenu() {
+        System.out.println("");
+        System.out.println("Please select from the following options (enter number):");
         System.out.println("1. List Books");
         System.out.println("2. Checkout Book");
         System.out.println("3. Return Book");
         System.out.println("4. Quit");
-
     }
 
     public void listBooks() {
