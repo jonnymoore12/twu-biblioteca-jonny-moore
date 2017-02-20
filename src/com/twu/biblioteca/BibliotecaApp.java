@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
-    private Library library = new Library();
+    private static Library library = new Library();
+    private static UserInput userInput = new UserInput();
 
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         bibliotecaApp.run();
-
+        BibliotecaApp.displayMenu();
     }
 
     public void run() {
         System.out.println("Welcome to Biblioteca!");
-        BibliotecaApp.displayMenu();
     }
 
     public static void displayMenu() {
@@ -24,9 +24,17 @@ public class BibliotecaApp {
         System.out.println("2. Checkout Book");
         System.out.println("3. Return Book");
         System.out.println("4. Quit");
+
+        switch (userInput.getUserInput()) {
+            case 1:
+                listBooks();
+            default:
+                System.out.println("TBC");
+                break;
+        }
     }
 
-    public void listBooks() {
+    public static void listBooks() {
 
         printBookDetailsColumns();
 
@@ -35,16 +43,16 @@ public class BibliotecaApp {
         }
     }
 
-    private void printBookDetailsColumns() {
+    private static void printBookDetailsColumns() {
         spaceContentAcrossRow("Title", "Author", "Year");
         spaceContentAcrossRow("-----", "------", "----");
     }
 
-    private void printBookInfo(Book book) {
+    private static void printBookInfo(Book book) {
         spaceContentAcrossRow(book.getTitle(), book.getAuthor(), book.getYear());
     }
 
-    private void spaceContentAcrossRow(String column1, String column2, String column3) {
+    private static void spaceContentAcrossRow(String column1, String column2, String column3) {
         System.out.printf("%-20s %-20s %10s %n", column1, column2, column3);
     }
 
