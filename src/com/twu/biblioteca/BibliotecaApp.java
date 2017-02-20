@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.Scanner;
+
 public class BibliotecaApp {
 
     private Library library = new Library();
@@ -12,6 +14,18 @@ public class BibliotecaApp {
 
     public void run() {
         System.out.println("Welcome to Biblioteca!");
+    }
+
+    public void displayMenu() {
+//        Scanner reader = new Scanner(System.in);
+//        System.out.println("Please choose from the following options (type the corresponding number)");
+//        String userInput = reader.next();
+
+        System.out.println("1. List Books");
+        System.out.println("2. Checkout Book");
+        System.out.println("3. Return Book");
+        System.out.println("4. Quit");
+
     }
 
     public void listBooks() {
@@ -35,4 +49,5 @@ public class BibliotecaApp {
     private void spaceContentAcrossRow(String column1, String column2, String column3) {
         System.out.printf("%-20s %-20s %10s %n", column1, column2, column3);
     }
+
 }
