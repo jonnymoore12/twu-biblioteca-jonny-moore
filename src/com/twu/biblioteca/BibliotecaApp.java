@@ -121,16 +121,16 @@ public class BibliotecaApp {
     }
 
     private void printBookDetailsColumns() {
-        spaceContentAcrossRow("Title", " Author", "Year");
-        spaceContentAcrossRow("-----", "------", "----");
+        spaceContentAcrossRow("Title", "Author", "Year", "Available?");
+        spaceContentAcrossRow("-----", "------", "----", "----------");
     }
 
     private void printBookInfo(Book book) {
-        spaceContentAcrossRow(book.getTitle(), book.getAuthor(), book.getYear());
+        spaceContentAcrossRow(book.getTitle(), book.getAuthor(), book.getYear(), String.valueOf(book.isAvailable()));
     }
 
-    private void spaceContentAcrossRow(String column1, String column2, String column3) {
-        System.out.printf("%-20s %-20s %10s %n", column1, column2, column3);
+    private void spaceContentAcrossRow(String column1, String column2, String column3, String column4 ) {
+        System.out.printf("%-20s %-20s %10s %-15s %n", column1, column2, column3, column4);
     }
 
     public void quit() {
