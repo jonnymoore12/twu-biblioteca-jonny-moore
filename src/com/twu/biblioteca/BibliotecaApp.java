@@ -39,7 +39,7 @@ public class BibliotecaApp {
     }
 
     private void getUserSelection() {
-        switch (userInput.getUserInput()) {
+        switch (userInput.getIntegerInput()) {
             case 1:
                 listBooks();
                 break;
@@ -58,6 +58,18 @@ public class BibliotecaApp {
         System.out.println("Invalid selection. Please select a valid option!");
     }
 
+    public void checkoutBook() {
+        System.out.println("Please select from the following books by entering the TITLE of the book you wish to checkout.");
+        listBooks();
+//        userInput.getIntegerInput();
+        // Iterate over the book titles
+    }
+
+//    private void userInputsBookTitle() {
+//        String input = userInput.getUserInput();
+//
+//    }
+
     private void printBookDetailsColumns() {
         spaceContentAcrossRow("Title", "Author", "Year");
         spaceContentAcrossRow("-----", "------", "----");
@@ -73,5 +85,9 @@ public class BibliotecaApp {
 
     public void quit() {
         System.out.println("Exiting Biblioteca. See you next time.");
+    }
+
+    public void successfulCheckout() {
+        System.out.println("You have successfully checked out 'Brave New World'. Enjoy your book");
     }
 }
