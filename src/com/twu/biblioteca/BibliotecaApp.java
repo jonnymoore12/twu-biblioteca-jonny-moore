@@ -39,7 +39,7 @@ public class BibliotecaApp {
     private void getUserSelection() {
         switch (userInput.getIntegerInput()) {
             case 1:
-                listBooks();
+                listAllBooks();
                 break;
             case 2:
                 checkoutBook();
@@ -55,7 +55,7 @@ public class BibliotecaApp {
         topMenu();
     }
 
-    public void listBooks() {
+    public void listAllBooks() {
 
         printBookDetailsColumns();
 
@@ -64,12 +64,23 @@ public class BibliotecaApp {
         }
     }
 
+    public void onlyListAvailableBooks() {
+
+        printBookDetailsColumns();
+
+        for (Book book : library.getBooks()) {
+            if (book.isAvailable()) {
+                printBookInfo(book);
+            }
+        }
+    }
+
     public void invalidSelection() {
         System.out.println("\n\nInvalid selection. Please select a valid option!");
     }
 
     public void checkoutBook() {
-        listBooks();
+        onlyListAvailableBooks();
         String bookTitle = checkoutBookPrompt();
 
         if (library.containsBook(bookTitle)) {
@@ -110,4 +121,5 @@ public class BibliotecaApp {
     public String returnsFred() {
         return "Fred";
     }
+
 }
