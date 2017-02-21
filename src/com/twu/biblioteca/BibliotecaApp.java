@@ -43,9 +43,11 @@ public class BibliotecaApp {
             case 1:
                 listBooks();
                 break;
+            case 2:
+//                checkoutBook();
+                break;
             case 4:
                 quit();
-                System.exit(0);
                 break;
             default:
                 invalidSelection();;
@@ -58,11 +60,15 @@ public class BibliotecaApp {
         System.out.println("Invalid selection. Please select a valid option!");
     }
 
-    public void checkoutBook() {
-        System.out.println("Please select from the following books by entering the TITLE of the book you wish to checkout.");
-        listBooks();
-//        userInput.getIntegerInput();
-        // Iterate over the book titles
+//    public void checkoutBook() {
+//        System.out.println("Please select from the following books by entering the TITLE of the book you wish to checkout.");
+//        listBooks();
+//        String title = userInput.getStringInput();
+//        // Check userInput for match
+//    }
+
+    public void confirmSuccessfulCheckout() {
+        System.out.println("You have successfully checked out 'Brave New World'. Enjoy your book");
     }
 
 //    private void userInputsBookTitle() {
@@ -85,9 +91,5 @@ public class BibliotecaApp {
 
     public void quit() {
         System.out.println("Exiting Biblioteca. See you next time.");
-    }
-
-    public void successfulCheckout() {
-        System.out.println("You have successfully checked out 'Brave New World'. Enjoy your book");
     }
 }

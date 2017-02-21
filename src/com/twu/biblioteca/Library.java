@@ -17,4 +17,13 @@ public class Library {
     public List<Book> getBooks() {
         return books;
     }
+
+    public boolean containsBook(String bookTitle) {
+        for (Book book : books) {
+            if (bookTitle == book.getTitle()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
