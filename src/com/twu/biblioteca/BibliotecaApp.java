@@ -1,29 +1,23 @@
 package com.twu.biblioteca;
 
-import java.util.Scanner;
-
 public class BibliotecaApp {
 
-    private Library library = new Library();
+    private static Library library = new Library();
+    private static UserInput userInput = new UserInput();
 
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         bibliotecaApp.run();
-
+        bibliotecaApp.topMenu();
     }
 
     public void run() {
         System.out.println("Welcome to Biblioteca!");
-        BibliotecaApp.displayMenu();
     }
 
-    public static void displayMenu() {
-        System.out.println("");
-        System.out.println("Please select from the following options (enter number):");
-        System.out.println("1. List Books");
-        System.out.println("2. Checkout Book");
-        System.out.println("3. Return Book");
-        System.out.println("4. Quit");
+    public void topMenu() {
+        displayMenuOptions();
+        getUserSelection();
     }
 
     public void listBooks() {
@@ -33,6 +27,31 @@ public class BibliotecaApp {
         for (Book book : library.getBooks()) {
             printBookInfo(book);
         }
+    }
+
+    public void displayMenuOptions() {
+        System.out.println("");
+        System.out.println("Please select from the following options (enter number):");
+        System.out.println("1. List Books");
+        System.out.println("2. Checkout Book");
+        System.out.println("3. Return Book");
+        System.out.println("4. Quit");
+    }
+
+    private void getUserSelection() {
+        switch (userInput.getUserInput()) {
+            case 1:
+                listBooks();
+                break;
+            default:
+                invalidSelection();;
+                getUserSelection();
+                break;
+        }
+    }
+
+    public void invalidSelection() {
+        System.out.println("Invalid selection. Please select a valid option!");
     }
 
     private void printBookDetailsColumns() {
