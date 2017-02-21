@@ -43,6 +43,10 @@ public class BibliotecaApp {
             case 1:
                 listBooks();
                 break;
+            case 4:
+                quit();
+                System.exit(0);
+                break;
             default:
                 invalidSelection();;
                 getUserSelection();
@@ -67,4 +71,7 @@ public class BibliotecaApp {
         System.out.printf("%-20s %-20s %10s %n", column1, column2, column3);
     }
 
+    public void quit() {
+        System.out.println("Exiting Biblioteca. See you next time.");
+    }
 }
