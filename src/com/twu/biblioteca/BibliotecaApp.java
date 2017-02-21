@@ -25,17 +25,10 @@ public class BibliotecaApp {
         getUserSelection();
     }
 
-    public void listBooks() {
-
-        printBookDetailsColumns();
-
-        for (Book book : library.getBooks()) {
-            printBookInfo(book);
-        }
-    }
-
     public void displayMenuOptions() {
         System.out.println("");
+        System.out.println("MAIN MENU");
+        System.out.println("---------");
         System.out.println("Please select from the following options (enter number):");
         System.out.println("1. List Books");
         System.out.println("2. Checkout Book");
@@ -59,10 +52,20 @@ public class BibliotecaApp {
                 getUserSelection();
                 break;
         }
+        topMenu();
+    }
+
+    public void listBooks() {
+
+        printBookDetailsColumns();
+
+        for (Book book : library.getBooks()) {
+            printBookInfo(book);
+        }
     }
 
     public void invalidSelection() {
-        System.out.println("Invalid selection. Please select a valid option!");
+        System.out.println("\n\nInvalid selection. Please select a valid option!");
     }
 
     public void checkoutBook() {
@@ -79,16 +82,16 @@ public class BibliotecaApp {
     }
 
     private String checkoutBookPrompt() {
-        System.out.println("Please select from the available books by entering the TITLE of the book you wish to checkout.");
+        System.out.println("\nPlease select from the available books by entering the TITLE of the book you wish to checkout.");
         return userInput.getStringInput();
     }
 
     private void confirmSuccessfulCheckout(String bookTitle) {
-        System.out.println("You have successfully checked out '" + bookTitle + "'. Thank you! Enjoy your book");
+        System.out.println("\nYou have successfully checked out '" + bookTitle + "'. Thank you! Enjoy your book");
     }
 
     private void printBookDetailsColumns() {
-        spaceContentAcrossRow("Title", "Author", "Year");
+        spaceContentAcrossRow("\nTitle", " Author", "Year");
         spaceContentAcrossRow("-----", "------", "----");
     }
 
