@@ -85,11 +85,13 @@ public class BibliotecaApp {
 
     public void checkoutBook() {
         onlyListAvailableBooks();
-        String bookTitle = checkoutBookPrompt();
-
+        String bookTitle = promptUserForInput("\n\nPlease select from the available books by entering " +
+                "the TITLE of the book you wish to checkout. (For main menu, enter: main menu)");
         if (library.containsBook(bookTitle)) {
             library.removeBook(bookTitle);
             confirmSuccessfulCheckout(bookTitle);
+        } else if (bookTitle.contains("main menu")) {
+            topMenu();
         } else {
             invalidSelection();
             checkoutBook();
@@ -97,21 +99,25 @@ public class BibliotecaApp {
     }
 
     public void returnBook() {
-        System.out.println("Please enter the title of the book you wish to return:");
-        String bookTitle = userInput.getStringInput();
+        String bookTitle = promptUserForInput("Please enter the title of the book you wish to return:");
         if (library.bookWaitingToBeReturned(bookTitle)) {
             library.returnBook(bookTitle);
-            System.out.println("Thank you for returning the book");
+            System.out.println("\nThank you for returning the book.");
+        } else if (library.containsBook(bookTitle)) {
+            System.out.println("\nThis book is already in the Biblioteca. You must have the wrong library!");
+        } else {
+            System.out.println("\nThat is not a valid book to return. Please try again.");
+            returnBook();
         }
     }
 
-    private String checkoutBookPrompt() {
-        System.out.println("\n\nPlease select from the available books by entering the TITLE of the book you wish to checkout.");
+    private String promptUserForInput(String prompt) {
+        System.out.println(prompt);
         return userInput.getStringInput();
     }
 
     private void confirmSuccessfulCheckout(String bookTitle) {
-        System.out.println("\n\nYou have successfully checked out '" + bookTitle + "'. Thank you! Enjoy your book");
+        System.out.println("\n\nYou have successfully checked out '" + bookTitle + "'. Thank you! Enjoy your book.");
     }
 
     private void printBookDetailsColumns() {
