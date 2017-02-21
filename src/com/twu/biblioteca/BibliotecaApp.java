@@ -43,6 +43,9 @@ public class BibliotecaApp {
             case 2:
                 checkoutBook();
                 break;
+            case 3:
+                returnBook();
+                break;
             case 4:
                 quit();
                 break;
@@ -90,6 +93,15 @@ public class BibliotecaApp {
         } else {
             invalidSelection();
             checkoutBook();
+        }
+    }
+
+    public void returnBook() {
+        System.out.println("Please enter the title of the book you wish to return:");
+        String bookTitle = userInput.getStringInput();
+        if (library.bookWaitingToBeReturned(bookTitle)) {
+            library.returnBook(bookTitle);
+            System.out.println("Thank you for returning the book");
         }
     }
 

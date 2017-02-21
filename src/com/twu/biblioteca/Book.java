@@ -39,7 +39,7 @@ public class Book {
         return isAvailable;
     }
 
-    public void markUnavailable() {
-        this.isAvailable = false;
+    public void setAvailability(boolean availability) {
+        this.isAvailable = availability;
     }
 }
