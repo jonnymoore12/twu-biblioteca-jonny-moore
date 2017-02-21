@@ -70,6 +70,7 @@ public class BibliotecaApp {
         String bookTitle = checkoutBookPrompt();
 
         if (library.containsBook(bookTitle)) {
+            library.removeBook(bookTitle);
             confirmSuccessfulCheckout(bookTitle);
         } else {
             invalidSelection();

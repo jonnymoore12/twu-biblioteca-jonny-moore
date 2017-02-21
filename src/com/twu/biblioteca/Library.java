@@ -10,9 +10,9 @@ import static java.util.Arrays.asList;
  */
 public class Library {
 
-    private List<Book> books = asList( new Book("Brave New World", "Aldous Huxley", "1931"),
+    private List<Book> books = new ArrayList(Arrays.asList( new Book("Brave New World", "Aldous Huxley", "1931"),
                             new Book("Lolita", "Vladimir Nabokov", "1955"),
-                            new Book("Fight Club", "Chuck Palahniuk", "1996") );
+                            new Book("Fight Club", "Chuck Palahniuk", "1996") ));
 
     public List<Book> getBooks() {
         return books;
@@ -27,4 +27,13 @@ public class Library {
         }
         return false;
     }
+
+    public void removeBook(String bookTitle) {
+        for (Book book : new ArrayList<Book>(books)) {
+            if (bookTitle == book.getTitle()) {
+                books.remove(book);
+            }
+        }
+    }
+
 }
