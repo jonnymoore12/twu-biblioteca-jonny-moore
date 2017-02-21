@@ -35,9 +35,9 @@ public class Library {
     }
 
     public void removeBook(String bookTitle) {
-        for (Book book : new ArrayList<Book>(books)) {
-            if (bookTitle == book.getTitle()) {
-                books.remove(book);
+        for (Book book : books) {
+            if (bookTitle.contains(book.getTitle())) {
+                book.markUnavailable();
             }
         }
     }

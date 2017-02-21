@@ -38,4 +38,8 @@ public class Book {
     public boolean isAvailable() {
         return isAvailable;
     }
+
+    public void markUnavailable() {
+        this.isAvailable = false;
+    }
 }

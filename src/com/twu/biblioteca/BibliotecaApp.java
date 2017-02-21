@@ -26,8 +26,7 @@ public class BibliotecaApp {
     }
 
     public void displayMenuOptions() {
-        System.out.println("");
-        System.out.println("MAIN MENU");
+        System.out.println("\n\nMAIN MENU");
         System.out.println("---------");
         System.out.println("Please select from the following options (enter number):");
         System.out.println("1. List Books");
@@ -57,6 +56,7 @@ public class BibliotecaApp {
 
     public void listAllBooks() {
 
+        System.out.println("\n\nCheck out the complete book listing at Biblioteca:");
         printBookDetailsColumns();
 
         for (Book book : library.getBooks()) {
@@ -66,6 +66,7 @@ public class BibliotecaApp {
 
     public void onlyListAvailableBooks() {
 
+        System.out.println("\n\nThese are the currently available books at Biblioteca:");
         printBookDetailsColumns();
 
         for (Book book : library.getBooks()) {
@@ -76,7 +77,7 @@ public class BibliotecaApp {
     }
 
     public void invalidSelection() {
-        System.out.println("\n\nInvalid selection. Please select a valid option!");
+        System.out.println("\n\n\nInvalid selection. Please select a valid option!");
     }
 
     public void checkoutBook() {
@@ -93,16 +94,16 @@ public class BibliotecaApp {
     }
 
     private String checkoutBookPrompt() {
-        System.out.println("\nPlease select from the available books by entering the TITLE of the book you wish to checkout.");
+        System.out.println("\n\nPlease select from the available books by entering the TITLE of the book you wish to checkout.");
         return userInput.getStringInput();
     }
 
     private void confirmSuccessfulCheckout(String bookTitle) {
-        System.out.println("\nYou have successfully checked out '" + bookTitle + "'. Thank you! Enjoy your book");
+        System.out.println("\n\nYou have successfully checked out '" + bookTitle + "'. Thank you! Enjoy your book");
     }
 
     private void printBookDetailsColumns() {
-        spaceContentAcrossRow("\nTitle", " Author", "Year");
+        spaceContentAcrossRow("Title", " Author", "Year");
         spaceContentAcrossRow("-----", "------", "----");
     }
 
@@ -116,10 +117,6 @@ public class BibliotecaApp {
 
     public void quit() {
         System.out.println("Exiting Biblioteca. See you next time.");
-    }
-
-    public String returnsFred() {
-        return "Fred";
     }
 
 }
