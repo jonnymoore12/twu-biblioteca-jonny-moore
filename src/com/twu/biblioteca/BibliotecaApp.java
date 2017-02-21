@@ -5,8 +5,13 @@ public class BibliotecaApp {
     private static Library library = new Library();
     private static UserInput userInput = new UserInput();
 
+    public BibliotecaApp(Library library, UserInput userInput) {
+        this.library = library;
+        this.userInput = userInput;
+    }
+
     public static void main(String[] args) {
-        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(new Library(), new UserInput());
         bibliotecaApp.run();
         bibliotecaApp.topMenu();
     }
@@ -44,7 +49,7 @@ public class BibliotecaApp {
                 listBooks();
                 break;
             case 2:
-//                checkoutBook();
+                checkoutBook();
                 break;
             case 4:
                 quit();
@@ -60,21 +65,26 @@ public class BibliotecaApp {
         System.out.println("Invalid selection. Please select a valid option!");
     }
 
-//    public void checkoutBook() {
-//        System.out.println("Please select from the following books by entering the TITLE of the book you wish to checkout.");
-//        listBooks();
-//        String title = userInput.getStringInput();
-//        // Check userInput for match
-//    }
+    public void checkoutBook() {
+        listBooks();
+        String bookTitle = checkoutBookPrompt();
 
-    public void confirmSuccessfulCheckout() {
-        System.out.println("You have successfully checked out 'Brave New World'. Enjoy your book");
+        if (library.containsBook(bookTitle)) {
+            confirmSuccessfulCheckout(bookTitle);
+        } else {
+            invalidSelection();
+            checkoutBook();
+        }
     }
 
-//    private void userInputsBookTitle() {
-//        String input = userInput.getUserInput();
-//
-//    }
+    private String checkoutBookPrompt() {
+        System.out.println("Please select from the available books by entering the TITLE of the book you wish to checkout.");
+        return userInput.getStringInput();
+    }
+
+    private void confirmSuccessfulCheckout(String bookTitle) {
+        System.out.println("You have successfully checked out '" + bookTitle + "'. Thank you! Enjoy your book");
+    }
 
     private void printBookDetailsColumns() {
         spaceContentAcrossRow("Title", "Author", "Year");
@@ -91,5 +101,9 @@ public class BibliotecaApp {
 
     public void quit() {
         System.out.println("Exiting Biblioteca. See you next time.");
+    }
+
+    public String returnsFred() {
+        return "Fred";
     }
 }

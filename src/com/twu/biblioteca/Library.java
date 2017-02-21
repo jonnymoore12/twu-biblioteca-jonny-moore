@@ -20,7 +20,8 @@ public class Library {
 
     public boolean containsBook(String bookTitle) {
         for (Book book : books) {
-            if (bookTitle == book.getTitle()) {
+            // This should be equality but there's a bug:
+            if (bookTitle.contains(book.getTitle())) {
                 return true;
             }
         }
