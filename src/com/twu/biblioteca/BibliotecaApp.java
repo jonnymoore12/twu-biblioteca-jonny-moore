@@ -17,7 +17,10 @@ public class BibliotecaApp {
     }
 
     public void welcomeMessage() {
-        System.out.println("Welcome to Biblioteca!");
+        System.out.println("==========================================================");
+        System.out.println("==================Welcome to Biblioteca!==================");
+        System.out.println("===============The Bangalore Public Library===============");
+        System.out.println("==========================================================");
     }
 
     public void topMenu() {
@@ -59,7 +62,7 @@ public class BibliotecaApp {
 
     public void listAllBooks() {
 
-        System.out.println("\n\nCheck out the complete book listing at Biblioteca:");
+        System.out.println("\n\nCheck out the COMPLETE book listing at Biblioteca:");
         printBookDetailsColumns();
 
         for (Book book : library.getBooks()) {
@@ -69,7 +72,7 @@ public class BibliotecaApp {
 
     public void onlyListAvailableBooks() {
 
-        System.out.println("\n\nThese are the currently available books at Biblioteca:");
+        System.out.println("\n\nThese are the CURRENTLY AVAILABLE books at Biblioteca:");
         printBookDetailsColumns();
 
         for (Book book : library.getBooks()) {
@@ -86,7 +89,7 @@ public class BibliotecaApp {
     public void checkoutBook() {
         onlyListAvailableBooks();
         String bookTitle = promptUserForInput("\nPlease select from the available books by entering " +
-                "the TITLE of the book you wish to checkout. (For main menu, enter: main menu)");
+                            "the TITLE of the book you wish to checkout. (For main menu, enter: main menu).");
         if (library.containsBook(bookTitle)) {
             library.removeBook(bookTitle);
             confirmSuccessfulCheckout(bookTitle);
@@ -99,12 +102,15 @@ public class BibliotecaApp {
     }
 
     public void returnBook() {
-        String bookTitle = promptUserForInput("\nPlease enter the title of the book you wish to return:");
+        String bookTitle = promptUserForInput("\nPlease enter the title of the book you wish to return. " +
+                                                                            "For main menu, enter: main menu).");
         if (library.bookWaitingToBeReturned(bookTitle)) {
             library.returnBook(bookTitle);
-            System.out.println("\nThank you for returning the book.");
+            System.out.println("\nThank you for returning '" + bookTitle + "'.");
         } else if (library.containsBook(bookTitle)) {
             System.out.println("\nThis book is already in the Biblioteca. You must have the wrong library!");
+        } else if (bookTitle.contains("main menu")) {
+            topMenu();
         } else {
             System.out.println("\nThat is not a valid book to return. Please try again.");
             returnBook();
@@ -130,7 +136,7 @@ public class BibliotecaApp {
     }
 
     private void spaceContentAcrossRow(String column1, String column2, String column3, String column4 ) {
-        System.out.printf("%-20s %-20s %10s %-15s %n", column1, column2, column3, column4);
+        System.out.printf("%-20s %-20s %s %-15s %n", column1, column2, column3, column4);
     }
 
     public void quit() {
