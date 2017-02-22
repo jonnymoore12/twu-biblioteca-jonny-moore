@@ -26,8 +26,7 @@ public class Library {
 
     public boolean containsBook(String bookTitle) {
         for (Book book : books) {
-            // This should be equality not contains() but there's a bug:
-            if (bookTitle.contains(book.getTitle()) && book.isAvailable()) {
+            if (bookTitle == book.getTitle() && book.isAvailable()) {
                 return true;
             }
         }
@@ -36,7 +35,7 @@ public class Library {
 
     public boolean bookWaitingToBeReturned(String bookTitle) {
         for (Book book : books) {
-            if (bookTitle.contains(book.getTitle()) && !book.isAvailable()) {
+            if (bookTitle == book.getTitle() && !book.isAvailable()) {
                 return true;
             }
         }
@@ -45,7 +44,7 @@ public class Library {
 
     public void removeBook(String bookTitle) {
         for (Book book : books) {
-            if (bookTitle.contains(book.getTitle())) {
+            if (bookTitle == book.getTitle()) {
                 book.setAvailability(false);
             }
         }
@@ -53,7 +52,7 @@ public class Library {
 
     public void returnBook(String bookTitle) {
         for (Book book : books) {
-            if (bookTitle.contains(book.getTitle())) {
+            if (bookTitle == book.getTitle()) {
                 book.setAvailability(true);
             }
         }

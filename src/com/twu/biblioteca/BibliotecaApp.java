@@ -12,11 +12,11 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp(new Library(), new UserInput());
-        bibliotecaApp.run();
+        bibliotecaApp.welcomeMessage();
         bibliotecaApp.topMenu();
     }
 
-    public void run() {
+    public void welcomeMessage() {
         System.out.println("Welcome to Biblioteca!");
     }
 
@@ -36,19 +36,19 @@ public class BibliotecaApp {
     }
 
     private void getUserSelection() {
-        switch (userInput.getIntegerInput()) {
-            case 1:
+        switch (userInput.getStringInput()) {
+            case "1":
                 listAllBooks();
                 break;
-            case 2:
+            case "2":
                 checkoutBook();
                 break;
-            case 3:
+            case "3":
                 returnBook();
                 break;
-            case 4:
+            case "4":
                 quit();
-                break;
+                System.exit(0);
             default:
                 invalidSelection();;
                 getUserSelection();
@@ -85,7 +85,7 @@ public class BibliotecaApp {
 
     public void checkoutBook() {
         onlyListAvailableBooks();
-        String bookTitle = promptUserForInput("\n\nPlease select from the available books by entering " +
+        String bookTitle = promptUserForInput("\nPlease select from the available books by entering " +
                 "the TITLE of the book you wish to checkout. (For main menu, enter: main menu)");
         if (library.containsBook(bookTitle)) {
             library.removeBook(bookTitle);
@@ -99,7 +99,7 @@ public class BibliotecaApp {
     }
 
     public void returnBook() {
-        String bookTitle = promptUserForInput("Please enter the title of the book you wish to return:");
+        String bookTitle = promptUserForInput("\nPlease enter the title of the book you wish to return:");
         if (library.bookWaitingToBeReturned(bookTitle)) {
             library.returnBook(bookTitle);
             System.out.println("\nThank you for returning the book.");

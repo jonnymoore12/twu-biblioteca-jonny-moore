@@ -7,11 +7,9 @@ import java.util.Scanner;
  */
 public class UserInput {
 
-    public int getIntegerInput() {
-        return new Scanner(System.in).nextInt();
-    }
+    private Scanner scanner = new Scanner(System.in);
 
     public String getStringInput() {
-        return new Scanner(System.in).nextLine();
+        return scanner.nextLine();
     }
 }
