@@ -2,8 +2,18 @@ package com.twu.biblioteca;
 
 public class BibliotecaApp {
 
+    // Do these have to be static?
+
+    // And which parameters need to be passed in??
     private static Library library = new Library();
     private static UserInput userInput = new UserInput();
+    private static UserAccount userAccount = new UserAccount();
+
+    public BibliotecaApp(Library library, UserAccount userAccount, UserInput userInput) {
+        this.library = library;
+        this.userAccount = userAccount;
+        this.userInput = userInput;
+    }
 
     public BibliotecaApp(Library library, UserInput userInput) {
         this.library = library;
@@ -11,8 +21,9 @@ public class BibliotecaApp {
     }
 
     public static void main(String[] args) {
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(new Library(), new UserInput());
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(new Library(), new UserAccount(), new UserInput());
         bibliotecaApp.welcomeMessage();
+        bibliotecaApp.login();
         bibliotecaApp.topMenu();
     }
 
@@ -21,6 +32,19 @@ public class BibliotecaApp {
         System.out.println("==================Welcome to Biblioteca!==================");
         System.out.println("===============The Bangalore Public Library===============");
         System.out.println("==========================================================");
+    }
+
+    public void login() {
+        String attemptedLibraryNumber = promptUserForInput("Please enter your login credentials to login." +
+                                                                                                " Library number:");
+        String attemptedPassword = promptUserForInput("Please enter your password:");
+
+        if (userAccount.verifyLogin(attemptedLibraryNumber, attemptedPassword)) {
+            System.out.println("Login successful. Welcome back to Biblioteca!");
+        } else {
+            System.out.println("I'm afraid something went wrong. Login unsuccessful.");
+            login();
+        }
     }
 
     public void topMenu() {
@@ -98,7 +122,7 @@ public class BibliotecaApp {
     }
 
     public void invalidSelection() {
-        System.out.println("\n\n\nInvalid selection. Please select a valid option!");
+        System.out.println("\nInvalid selection. Please select a valid option!");
     }
 
     public void checkoutBook() {
@@ -106,7 +130,7 @@ public class BibliotecaApp {
                                                                                  "(For main menu, enter: main menu).");
         if (library.containsBook(bookTitle)) {
             library.removeBook(bookTitle);
-            confirmSuccessfulCheckout(bookTitle);
+            confirmSuccessfulCheckout("book", bookTitle);
         } else if (bookTitle.contains("main menu")) {
             topMenu();
         } else {
@@ -120,7 +144,7 @@ public class BibliotecaApp {
                                                                                 "(For main menu, enter: main menu).");
         if (library.containsMovie(movieName)) {
             library.removeMovie(movieName);
-            confirmSuccessfulCheckout(movieName);
+            confirmSuccessfulCheckout("movie", movieName);
         } else if (movieName.contains("main menu")) {
             topMenu();
         } else {
@@ -168,8 +192,8 @@ public class BibliotecaApp {
         return userInput.getStringInput();
     }
 
-    private void confirmSuccessfulCheckout(String bookTitle) {
-        System.out.println("\n\nYou have successfully checked out '" + bookTitle + "'. Thank you. Enjoy your book!");
+    private void confirmSuccessfulCheckout(String type, String title) {
+        System.out.println("\n\nYou have successfully checked out '" + title + "'. Thank you. Enjoy your " + type + "!");
     }
 
     private void printBookInfo(String title, String author, String year) {
@@ -193,5 +217,4 @@ public class BibliotecaApp {
     public void quit() {
         System.out.println("Thanks for using Biblioteca. See you next time.");
     }
-
 }

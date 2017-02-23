@@ -13,6 +13,7 @@ public class UserAccount {
             "5551234", "123-4567", "password")));
     private boolean hasActiveUser = false;
 
+    // Do we need this?
     public UserAccount() {
     }
 
@@ -24,13 +25,9 @@ public class UserAccount {
         hasActiveUser = true;
     }
 
-    public String loginPrompt() {
-        return "Please enter your library number to login:";
-    }
-
     public boolean verifyLogin(String libraryNumber, String password) {
         for (User user : users) {
-            if (libraryNumber == user.getLibraryNumber() && password == user.getPassword()) {
+            if (libraryNumber.equals(user.getLibraryNumber()) && password.equals(user.getPassword())) {
                 setHasActiveUser();
                 return true;
             }

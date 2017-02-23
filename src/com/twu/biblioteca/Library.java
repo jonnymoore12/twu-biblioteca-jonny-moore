@@ -33,8 +33,7 @@ public class Library {
 
     public boolean containsBook(String bookTitle) {
         for (Book book : books) {
-            // Should be equality (not "contains") but there's a bug!
-            if (bookTitle.contains(book.getTitle()) && book.isAvailable()) {
+            if (bookTitle.equals(book.getTitle()) && book.isAvailable()) {
                 return true;
             }
         }
@@ -43,8 +42,7 @@ public class Library {
 
     public boolean containsMovie(String movieName) {
         for (Movie movie : movies) {
-            // Should be equality (not "contains") but there's a bug!
-            if (movieName.contains(movie.getName()) && movie.isAvailable()) {
+            if (movieName.equals(movie.getName()) && movie.isAvailable()) {
                 return true;
             }
         }
@@ -53,7 +51,7 @@ public class Library {
 
     public boolean bookWaitingToBeReturned(String bookTitle) {
         for (Book book : books) {
-            if (bookTitle.contains(book.getTitle()) && !book.isAvailable()) {
+            if (bookTitle.equals(book.getTitle()) && !book.isAvailable()) {
                 return true;
             }
         }
@@ -62,7 +60,7 @@ public class Library {
 
     public boolean movieWaitingToBeReturned(String bookName) {
         for (Movie movie : movies) {
-            if (bookName.contains(movie.getName()) && !movie.isAvailable()) {
+            if (bookName.equals(movie.getName()) && !movie.isAvailable()) {
                 return true;
             }
         }
@@ -71,7 +69,7 @@ public class Library {
 
     public void removeBook(String bookTitle) {
         for (Book book : books) {
-            if (bookTitle.contains(book.getTitle())) {
+            if (bookTitle.equals(book.getTitle())) {
                 book.setAvailability(false);
             }
         }
@@ -79,7 +77,7 @@ public class Library {
 
     public void removeMovie(String movieName) {
         for (Movie movie : movies) {
-            if (movieName.contains(movie.getName())) {
+            if (movieName.equals(movie.getName())) {
                 movie.setAvailability(false);
             }
         }
@@ -87,7 +85,7 @@ public class Library {
 
     public void returnBook(String bookTitle) {
         for (Book book : books) {
-            if (bookTitle.contains(book.getTitle())) {
+            if (bookTitle.equals(book.getTitle())) {
                 book.setAvailability(true);
             }
         }
@@ -95,7 +93,7 @@ public class Library {
 
     public void returnMovie(String movieName) {
         for (Movie movie : movies) {
-            if (movieName.contains(movie.getName())) {
+            if (movieName.equals(movie.getName())) {
                 movie.setAvailability(true);
             }
         }
