@@ -121,10 +121,6 @@ public class BibliotecaApp {
         }
     }
 
-    public void invalidSelection() {
-        System.out.println("\nInvalid selection. Please select a valid option!");
-    }
-
     public void checkoutBook() {
         String bookTitle = promptUserForInput("\nPlease enter the TITLE of the book you wish to checkout. " +
                                                                                  "(For main menu, enter: main menu).");
@@ -184,7 +180,6 @@ public class BibliotecaApp {
             System.out.println("That is not a valid movie to return! Please try again.");
             returnMovie();
         }
-
     }
 
     private String promptUserForInput(String prompt) {
@@ -198,6 +193,10 @@ public class BibliotecaApp {
 
     private void printBookInfo(String title, String author, String year) {
         System.out.printf("%-20s %-20s %-15s %n", title, author, year);
+    }
+
+    private void invalidSelection() {
+        System.out.println("\nInvalid selection. Please select a valid option!");
     }
 
     private void printMovieInfo(String name, String director, String year, String rating) {
@@ -214,11 +213,11 @@ public class BibliotecaApp {
         printMovieInfo("----", "--------", "----", "------");
     }
 
-    public void quit() {
-        System.out.println("Thanks for using Biblioteca. See you next time.");
-    }
-
     public void showUserInfo() {
         userAccount.showCurrentUserInfo();
+    }
+
+    public void quit() {
+        System.out.println("Thanks for using Biblioteca. See you next time.");
     }
 }

@@ -38,14 +38,9 @@ public class BookTest {
     }
 
     @Test
-    public void setAvailability_canSetAvailabilityToTrue() {
+    public void setAvailability_canChangeAvailability() {
+        assertTrue(braveNewWorld.isAvailable());
         braveNewWorld.setAvailability(false);
         assertFalse(braveNewWorld.isAvailable());
-    }
-
-    @Test
-    public void setAvailability_canSetAvailabilityToFalse() {
-        unavailableBook.setAvailability(true);
-        assertTrue(unavailableBook.isAvailable());
     }
 }

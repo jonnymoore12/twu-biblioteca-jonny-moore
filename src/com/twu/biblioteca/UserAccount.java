@@ -13,11 +13,11 @@ public class UserAccount {
             "5551234", "123-4567", "password")));
     private User currentUser;
 
-    public UserAccount() {
-    }
-
     public UserAccount(List<User> users) {
         this.users = users;
+    }
+
+    public UserAccount() {
     }
 
     public User getCurrentUser() {
