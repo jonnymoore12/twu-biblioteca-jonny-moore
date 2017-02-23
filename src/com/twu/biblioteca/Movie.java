@@ -9,7 +9,7 @@ public class Movie {
     String director;
     String year;
     String rating;
-    boolean isAvailable;
+    boolean isAvailable = true;
 
     public Movie(String name, String director, String year, String rating, boolean isAvailable) {
         this.name = name;
@@ -40,5 +40,13 @@ public class Movie {
 
     public String getRating() {
         return rating;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailability(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 }

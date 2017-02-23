@@ -41,9 +41,28 @@ public class Library {
         return false;
     }
 
+    public boolean containsMovie(String movieName) {
+        for (Movie movie : movies) {
+            // Should be equality (not "contains") but there's a bug!
+            if (movieName.contains(movie.getName()) && movie.isAvailable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean bookWaitingToBeReturned(String bookTitle) {
         for (Book book : books) {
             if (bookTitle.contains(book.getTitle()) && !book.isAvailable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean movieWaitingToBeReturned(String bookName) {
+        for (Movie movie : movies) {
+            if (bookName.contains(movie.getName()) && !movie.isAvailable()) {
                 return true;
             }
         }
@@ -58,10 +77,26 @@ public class Library {
         }
     }
 
+    public void removeMovie(String movieName) {
+        for (Movie movie : movies) {
+            if (movieName.contains(movie.getName())) {
+                movie.setAvailability(false);
+            }
+        }
+    }
+
     public void returnBook(String bookTitle) {
         for (Book book : books) {
             if (bookTitle.contains(book.getTitle())) {
                 book.setAvailability(true);
+            }
+        }
+    }
+
+    public void returnMovie(String movieName) {
+        for (Movie movie : movies) {
+            if (movieName.contains(movie.getName())) {
+                movie.setAvailability(true);
             }
         }
     }

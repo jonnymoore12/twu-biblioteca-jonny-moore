@@ -35,8 +35,10 @@ public class BibliotecaApp {
         System.out.println("1. List Books");
         System.out.println("2. List Movies");
         System.out.println("3. Checkout Book");
-        System.out.println("4. Return Book");
-        System.out.println("5. Quit");
+        System.out.println("4. Checkout Movie");
+        System.out.println("5. Return Book");
+        System.out.println("6. Return Movie");
+        System.out.println("7. Quit");
     }
 
     private void getUserSelection() {
@@ -51,9 +53,15 @@ public class BibliotecaApp {
                 checkoutBook();
                 break;
             case "4":
-                returnBook();
+                checkoutMovie();
                 break;
             case "5":
+                returnBook();
+                break;
+            case "6":
+                returnMovie();
+                break;
+            case "7":
                 quit();
                 System.exit(0);
             default:
@@ -68,7 +76,7 @@ public class BibliotecaApp {
 
         System.out.println("\n\nCheck out the list of books currently at Biblioteca:");
 
-        printBookColumns();
+        printBookHeaders();
 
         for (Book book : library.getBooks()) {
             if (book.isAvailable()) {
@@ -80,10 +88,12 @@ public class BibliotecaApp {
     public void listMovies() {
         System.out.println("\n\nThese are the movies currently available at Biblioteca:");
 
-        printMovieColumns();
+        printMovieHeaders();
 
         for (Movie movie : library.getMovies()) {
-            printMovieInfo(movie.getName(), movie.getDirector(), movie.getYear(), movie.getRating());
+            if (movie.isAvailable()) {
+                printMovieInfo(movie.getName(), movie.getDirector(), movie.getYear(), movie.getRating());
+            }
         }
     }
 
@@ -105,6 +115,20 @@ public class BibliotecaApp {
         }
     }
 
+    public void checkoutMovie() {
+        String movieName = promptUserForInput("\nPlease enter the NAME of the movie you wish to checkout. " +
+                                                                                "(For main menu, enter: main menu).");
+        if (library.containsMovie(movieName)) {
+            library.removeMovie(movieName);
+            confirmSuccessfulCheckout(movieName);
+        } else if (movieName.contains("main menu")) {
+            topMenu();
+        } else {
+            invalidSelection();
+            checkoutMovie();
+        }
+    }
+
     public void returnBook() {
         String bookTitle = promptUserForInput("\nPlease enter the title of the book you wish to return. " +
                                                                             "For main menu, enter: main menu).");
@@ -121,13 +145,31 @@ public class BibliotecaApp {
         }
     }
 
+    public void returnMovie() {
+        String movieName = promptUserForInput("\nPlease enter the name of the book you wish to return. " +
+                "For main menu, enter: main menu).");
+
+        if (library.movieWaitingToBeReturned(movieName)) {
+            library.returnMovie(movieName);
+            System.out.println("\nThank you for returning '" + movieName + "'.");
+        } else if (library.containsMovie(movieName)) {
+            System.out.println("\nThis movie is already in the Biblioteca. You must have the wrong library!");
+        } else if (movieName.contains("main menu")) {
+            topMenu();
+        } else {
+            System.out.println("That is not a valid movie to return! Please try again.");
+            returnMovie();
+        }
+
+    }
+
     private String promptUserForInput(String prompt) {
         System.out.println(prompt);
         return userInput.getStringInput();
     }
 
     private void confirmSuccessfulCheckout(String bookTitle) {
-        System.out.println("\n\nYou have successfully checked out '" + bookTitle + "'. Thank you! Enjoy your book.");
+        System.out.println("\n\nYou have successfully checked out '" + bookTitle + "'. Thank you. Enjoy your book!");
     }
 
     private void printBookInfo(String title, String author, String year) {
@@ -138,12 +180,12 @@ public class BibliotecaApp {
         System.out.printf("%-20s %-20s %s %-15s %n", name, director, year, rating);
     }
 
-    private void printBookColumns() {
+    private void printBookHeaders() {
         printBookInfo("TITLE", "AUTHOR", "YEAR");
         printBookInfo("-----", "------", "----");
     }
 
-    private void printMovieColumns() {
+    private void printMovieHeaders() {
         printMovieInfo("NAME", "DIRECTOR", "YEAR", "RATING");
         printMovieInfo("----", "--------", "----", "------");
     }
