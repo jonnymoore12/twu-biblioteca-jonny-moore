@@ -2,12 +2,9 @@ package com.twu.biblioteca;
 
 public class BibliotecaApp {
 
-    // Do these have to be static?
-
-    // And which parameters need to be passed in??
-    private static Library library = new Library();
+    private Library library = new Library();
+    private UserAccount userAccount = new UserAccount();
     private static UserInput userInput = new UserInput();
-    private static UserAccount userAccount = new UserAccount();
 
     public BibliotecaApp(Library library, UserAccount userAccount, UserInput userInput) {
         this.library = library;
@@ -62,7 +59,8 @@ public class BibliotecaApp {
         System.out.println("4. Checkout Movie");
         System.out.println("5. Return Book");
         System.out.println("6. Return Movie");
-        System.out.println("7. Quit");
+        System.out.println("7. Display User Info");
+        System.out.println("8. Quit");
     }
 
     private void getUserSelection() {
@@ -84,8 +82,10 @@ public class BibliotecaApp {
                 break;
             case "6":
                 returnMovie();
-                break;
             case "7":
+                showUserInfo();
+                break;
+            case "8":
                 quit();
                 System.exit(0);
             default:
@@ -216,5 +216,9 @@ public class BibliotecaApp {
 
     public void quit() {
         System.out.println("Thanks for using Biblioteca. See you next time.");
+    }
+
+    public void showUserInfo() {
+        userAccount.showCurrentUserInfo();
     }
 }

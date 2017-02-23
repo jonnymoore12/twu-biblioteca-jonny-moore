@@ -11,27 +11,37 @@ public class UserAccount {
 
     private List<User> users = new ArrayList(Arrays.asList(new User("Jonny", "jonny@mail.com",
             "5551234", "123-4567", "password")));
-    private boolean hasActiveUser = false;
+    private User currentUser;
 
-    // Do we need this?
     public UserAccount() {
     }
 
-    public boolean getHasActiveUser() {
-        return hasActiveUser;
+    public UserAccount(List<User> users) {
+        this.users = users;
     }
 
-    public void setHasActiveUser() {
-        hasActiveUser = true;
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     public boolean verifyLogin(String libraryNumber, String password) {
         for (User user : users) {
             if (libraryNumber.equals(user.getLibraryNumber()) && password.equals(user.getPassword())) {
-                setHasActiveUser();
+                logIn(user);
                 return true;
             }
         }
         return false;
+    }
+
+    public void logIn(User jonny) {
+        this.currentUser = jonny;
+    }
+
+    public void showCurrentUserInfo() {
+        System.out.println("My User Information:");
+        System.out.println("Username: " + currentUser.getUsername());
+        System.out.println("email address: " + currentUser.getEmail());
+        System.out.println("Phone number: " + currentUser.getPhoneNumber());
     }
 }
