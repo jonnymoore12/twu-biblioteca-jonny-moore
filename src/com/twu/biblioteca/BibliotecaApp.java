@@ -42,7 +42,7 @@ public class BibliotecaApp {
     private void getUserSelection() {
         switch (userInput.getStringInput()) {
             case "1":
-                listAllBooks();
+                listBooks();
                 break;
             case "2":
                 listMovies();
@@ -64,24 +64,15 @@ public class BibliotecaApp {
         topMenu();
     }
 
-    public void listAllBooks() {
+    public void listBooks() {
 
-        System.out.println("\n\nCheck out the COMPLETE book listing at Biblioteca:");
-        printBookDetailsColumns();
+        System.out.println("\n\nCheck out the list of books currently at Biblioteca:");
 
-        for (Book book : library.getBooks()) {
-            printBookInfo(book);
-        }
-    }
-
-    public void onlyListAvailableBooks() {
-
-        System.out.println("\n\nThese are the CURRENTLY AVAILABLE books at Biblioteca:");
-        printBookDetailsColumns();
+        printBookColumns();
 
         for (Book book : library.getBooks()) {
             if (book.isAvailable()) {
-                printBookInfo(book);
+                printBookInfo(book.getTitle(), book.getAuthor(), book.getYear());
             }
         }
     }
@@ -89,7 +80,7 @@ public class BibliotecaApp {
     public void listMovies() {
         System.out.println("\n\nThese are the movies currently available at Biblioteca:");
 
-        printMovieInfo("NAME", "DIRECTOR", "YEAR", "RATING");
+        printMovieColumns();
 
         for (Movie movie : library.getMovies()) {
             printMovieInfo(movie.getName(), movie.getDirector(), movie.getYear(), movie.getRating());
@@ -101,9 +92,8 @@ public class BibliotecaApp {
     }
 
     public void checkoutBook() {
-        onlyListAvailableBooks();
-        String bookTitle = promptUserForInput("\nPlease select from the available books by entering " +
-                            "the TITLE of the book you wish to checkout. (For main menu, enter: main menu).");
+        String bookTitle = promptUserForInput("\nPlease enter the TITLE of the book you wish to checkout. " +
+                                                                                 "(For main menu, enter: main menu).");
         if (library.containsBook(bookTitle)) {
             library.removeBook(bookTitle);
             confirmSuccessfulCheckout(bookTitle);
@@ -140,25 +130,26 @@ public class BibliotecaApp {
         System.out.println("\n\nYou have successfully checked out '" + bookTitle + "'. Thank you! Enjoy your book.");
     }
 
-    private void printBookDetailsColumns() {
-        spaceContentAcrossRow("Title", "Author", "Year", "Available?");
-        spaceContentAcrossRow("-----", "------", "----", "----------");
-    }
-
-    private void printBookInfo(Book book) {
-        spaceContentAcrossRow(book.getTitle(), book.getAuthor(), book.getYear(), String.valueOf(book.isAvailable()));
+    private void printBookInfo(String title, String author, String year) {
+        System.out.printf("%-20s %-20s %-15s %n", title, author, year);
     }
 
     private void printMovieInfo(String name, String director, String year, String rating) {
         System.out.printf("%-20s %-20s %s %-15s %n", name, director, year, rating);
     }
 
-    private void spaceContentAcrossRow(String column1, String column2, String column3, String column4 ) {
-        System.out.printf("%-20s %-20s %s %-15s %n", column1, column2, column3, column4);
+    private void printBookColumns() {
+        printBookInfo("TITLE", "AUTHOR", "YEAR");
+        printBookInfo("-----", "------", "----");
+    }
+
+    private void printMovieColumns() {
+        printMovieInfo("NAME", "DIRECTOR", "YEAR", "RATING");
+        printMovieInfo("----", "--------", "----", "------");
     }
 
     public void quit() {
-        System.out.println("Exiting Biblioteca. See you next time.");
+        System.out.println("Thanks for using Biblioteca. See you next time.");
     }
 
 }
