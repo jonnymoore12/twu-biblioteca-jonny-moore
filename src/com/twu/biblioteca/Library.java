@@ -13,8 +13,13 @@ public class Library {
                             new Book("Lolita", "Vladimir Nabokov", "1955"),
                             new Book("Fight Club", "Chuck Palahniuk", "1996") ));
 
-    public Library(List<Book> books) {
+    private List<Movie> movies = new ArrayList(Arrays.asList(new Movie("Chungking Express", "Wong Kar Wai", "1994", "10"),
+            new Movie("The Shining", "Stanley Kubrick", "1980", "9"),
+            new Movie("The Goonies", "Richard Donner", "1985", "7")));
+
+    public Library(List<Book> books, List<Movie> movies) {
         this.books = books;
+        this.movies = movies;
     }
 
     public Library() {
@@ -23,6 +28,8 @@ public class Library {
     public List<Book> getBooks() {
         return books;
     }
+
+    public List<Movie> getMovies() { return movies; }
 
     public boolean containsBook(String bookTitle) {
         for (Book book : books) {

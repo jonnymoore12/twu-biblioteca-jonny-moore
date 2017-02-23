@@ -33,9 +33,10 @@ public class BibliotecaApp {
         System.out.println("---------");
         System.out.println("Please select from the following options (enter number):");
         System.out.println("1. List Books");
-        System.out.println("2. Checkout Book");
-        System.out.println("3. Return Book");
-        System.out.println("4. Quit");
+        System.out.println("2. List Movies");
+        System.out.println("3. Checkout Book");
+        System.out.println("4. Return Book");
+        System.out.println("5. Quit");
     }
 
     private void getUserSelection() {
@@ -44,12 +45,15 @@ public class BibliotecaApp {
                 listAllBooks();
                 break;
             case "2":
-                checkoutBook();
+                listMovies();
                 break;
             case "3":
-                returnBook();
+                checkoutBook();
                 break;
             case "4":
+                returnBook();
+                break;
+            case "5":
                 quit();
                 System.exit(0);
             default:
@@ -79,6 +83,16 @@ public class BibliotecaApp {
             if (book.isAvailable()) {
                 printBookInfo(book);
             }
+        }
+    }
+
+    public void listMovies() {
+        System.out.println("\n\nThese are the movies currently available at Biblioteca:");
+
+        printMovieInfo("NAME", "DIRECTOR", "YEAR", "RATING");
+
+        for (Movie movie : library.getMovies()) {
+            printMovieInfo(movie.getName(), movie.getDirector(), movie.getYear(), movie.getRating());
         }
     }
 
@@ -133,6 +147,10 @@ public class BibliotecaApp {
 
     private void printBookInfo(Book book) {
         spaceContentAcrossRow(book.getTitle(), book.getAuthor(), book.getYear(), String.valueOf(book.isAvailable()));
+    }
+
+    private void printMovieInfo(String name, String director, String year, String rating) {
+        System.out.printf("%-20s %-20s %s %-15s %n", name, director, year, rating);
     }
 
     private void spaceContentAcrossRow(String column1, String column2, String column3, String column4 ) {
