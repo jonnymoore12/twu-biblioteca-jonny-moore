@@ -96,6 +96,7 @@ public class LibraryTest {
 
     @Test
     public void returnBook_successfulReturnsPlaceBooksBackInLibraryAsAvailable() {
+        assertFalse(libraryWithUnavailableItems.containsBook("A Clockwork Orange"));
         libraryWithUnavailableItems.returnBook("A Clockwork Orange");
         assertTrue(libraryWithUnavailableItems.containsBook("A Clockwork Orange"));
     }

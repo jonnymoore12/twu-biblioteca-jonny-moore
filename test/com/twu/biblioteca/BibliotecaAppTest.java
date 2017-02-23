@@ -17,6 +17,7 @@ public class BibliotecaAppTest {
 
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+
     private BibliotecaApp bibliotecaApp = new BibliotecaApp(new Library(), new UserInput());
     private Library libraryWithUnavailableItems = new Library(new ArrayList(Arrays.asList(
             new Book("Brave New World", "Aldous Huxley", "1931"),
@@ -27,6 +28,7 @@ public class BibliotecaAppTest {
     private BibliotecaApp bibliotecaAppWithUnavailableItems =
             new BibliotecaApp(libraryWithUnavailableItems, new UserInput());
     private UserAccount userAccount = new UserAccount();
+    
     private UserInput mockedUserInput = mock(UserInput.class);
     private BibliotecaApp mockedBiblioteca = new BibliotecaApp(new Library(), userAccount, mockedUserInput);
 
@@ -109,7 +111,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void checkoutBook_promptsUserForValidSelection() {
-        when(mockedUserInput.getStringInput()).thenReturn("Brain New Wooooorld").thenReturn("Brave New World");
+        when(mockedUserInput.getStringInput()).thenReturn("Not a valid book").thenReturn("Brave New World");
         mockedBiblioteca.checkoutBook();
         assertTrue(outContent.toString().contains("Please select a valid option!"));
     }
@@ -123,19 +125,20 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void checkoutBook_confirmsUnsuccessfulBookCheckouts() {
-        when(mockedUserInput.getStringInput()).thenReturn("Not a valid book").thenReturn("Lolita");
-        mockedBiblioteca.checkoutBook();
-        assertTrue(outContent.toString().contains("Invalid selection. Please select a valid option!"));
-    }
-
-    @Test
     public void checkoutBook_successfulCheckoutsRemoveBookFromLibrary() {
         when(mockedUserInput.getStringInput()).thenReturn("Lolita");
         Library newLibrary = new Library();
+        assertTrue(newLibrary.containsBook("Lolita"));
         BibliotecaApp newBiblioteca = new BibliotecaApp(newLibrary, mockedUserInput);
         newBiblioteca.checkoutBook();
         assertFalse(newLibrary.containsBook("Lolita"));
+    }
+
+    @Test
+    public void checkoutMovie_promptsUserForValidSelection() {
+        when(mockedUserInput.getStringInput()).thenReturn("Not a valid movie").thenReturn("Chungking Express");
+        mockedBiblioteca.checkoutMovie();
+        assertTrue(outContent.toString().contains("Invalid selection. Please select a valid option!"));
     }
 
     @Test
@@ -147,26 +150,12 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void checkoutMovie_confirmsUnsuccessfulMovieCheckouts() {
-        when(mockedUserInput.getStringInput()).thenReturn("Not a valid movie").thenReturn("Chungking Express");
-        mockedBiblioteca.checkoutMovie();
-        assertTrue(outContent.toString().contains("Invalid selection. Please select a valid option!"));
-    }
-
-    @Test
     public void checkoutMovie_successfulCheckoutsRemoveMovieFromLibrary() {
         when(mockedUserInput.getStringInput()).thenReturn("Chungking Express");
         Library tempLibrary = new Library();
         BibliotecaApp newBiblioteca = new BibliotecaApp(tempLibrary, mockedUserInput);
         newBiblioteca.checkoutMovie();
         assertFalse(tempLibrary.containsBook("Chungking Express"));
-    }
-
-    @Test
-    public void checkoutMovie_promptsUserForValidSelection() {
-        when(mockedUserInput.getStringInput()).thenReturn("The Boonies").thenReturn("The Goonies");
-        mockedBiblioteca.checkoutMovie();
-        assertTrue(outContent.toString().contains("Please select a valid option!"));
     }
 
     @Test
@@ -181,6 +170,7 @@ public class BibliotecaAppTest {
     public void returnBook_successfulReturnsPlaceBookBackInLibrary() {
         when(mockedUserInput.getStringInput()).thenReturn("The Great Gatsby");
         BibliotecaApp bibliotecaWithGatsbyCheckedOut = new BibliotecaApp(libraryWithUnavailableItems, mockedUserInput);
+        assertFalse(libraryWithUnavailableItems.containsBook("The Great Gatsby"));
         bibliotecaWithGatsbyCheckedOut.returnBook();
         assertTrue(libraryWithUnavailableItems.containsBook("The Great Gatsby"));
     }
@@ -212,6 +202,7 @@ public class BibliotecaAppTest {
     public void returnBook_successfulReturnsMovieBackInLibrary() {
         when(mockedUserInput.getStringInput()).thenReturn("Alien");
         BibliotecaApp bibliotecaWithAlienCheckedOut = new BibliotecaApp(libraryWithUnavailableItems, mockedUserInput);
+        assertFalse(libraryWithUnavailableItems.containsMovie("Alien"));
         bibliotecaWithAlienCheckedOut.returnMovie();
         assertTrue(libraryWithUnavailableItems.containsMovie("Alien"));
     }

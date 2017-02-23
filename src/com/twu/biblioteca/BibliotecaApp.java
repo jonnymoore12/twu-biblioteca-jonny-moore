@@ -191,18 +191,6 @@ public class BibliotecaApp {
         System.out.println("\n\nYou have successfully checked out '" + title + "'. Thank you. Enjoy your " + type + "!");
     }
 
-    private void printBookInfo(String title, String author, String year) {
-        System.out.printf("%-20s %-20s %-15s %n", title, author, year);
-    }
-
-    private void invalidSelection() {
-        System.out.println("\nInvalid selection. Please select a valid option!");
-    }
-
-    private void printMovieInfo(String name, String director, String year, String rating) {
-        System.out.printf("%-20s %-20s %s %-15s %n", name, director, year, rating);
-    }
-
     private void printBookHeaders() {
         printBookInfo("TITLE", "AUTHOR", "YEAR");
         printBookInfo("-----", "------", "----");
@@ -212,6 +200,20 @@ public class BibliotecaApp {
         printMovieInfo("NAME", "DIRECTOR", "YEAR", "RATING");
         printMovieInfo("----", "--------", "----", "------");
     }
+
+
+    private void printBookInfo(String title, String author, String year) {
+        System.out.printf("%-20s %-20s %-15s %n", title, author, year);
+    }
+
+    private void printMovieInfo(String name, String director, String year, String rating) {
+        System.out.printf("%-20s %-20s %s %-15s %n", name, director, year, rating);
+    }
+
+    private void invalidSelection() {
+        System.out.println("\nInvalid selection. Please select a valid option!");
+    }
+
 
     public void showUserInfo() {
         userAccount.showCurrentUserInfo();
