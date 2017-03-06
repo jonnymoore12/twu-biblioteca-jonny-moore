@@ -82,6 +82,7 @@ public class BibliotecaApp {
                 break;
             case "6":
                 returnMovie();
+                break;
             case "7":
                 showUserInfo();
                 break;
