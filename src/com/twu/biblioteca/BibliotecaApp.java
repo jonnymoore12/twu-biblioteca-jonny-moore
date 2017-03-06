@@ -8,7 +8,7 @@ public class BibliotecaApp {
     private UserAccount userAccount = new UserAccount();
     private static UserInput userInput = new UserInput();
     private String userChoice = "";
-    private enum MenuItem { LIST_BOOKS, LIST_MOVIES};
+//    private enum MenuItem { LIST_BOOKS, LIST_MOVIES};
     private HashMap<String, Command> menuItemHashMap = new HashMap<String, Command>();
 
     public BibliotecaApp(Library library, UserAccount userAccount, UserInput userInput) {
@@ -178,13 +178,10 @@ public class BibliotecaApp {
         }
     }
 
-    public String getUserChoice() {
-        return userChoice;
-    }
-
     private void populateMenuItemHashMap() {
         menuItemHashMap.put("1", new ListBooks(library));
         menuItemHashMap.put("2", new ListMovies(library));
+        menuItemHashMap.put("3", new CheckoutBook(library));
     }
 
     private String promptUserForInput(String prompt) {
