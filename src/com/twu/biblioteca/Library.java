@@ -99,24 +99,25 @@ public class Library {
         }
     }
 
-    public void listBooks() {
-        System.out.println("\n\nCheck out the list of books currently at Biblioteca:");
-
-        printBookHeaders();
-
-        for (Book book : books) {
-            if (book.isAvailable()) {
-                printBookInfo(book.getTitle(), book.getAuthor(), book.getYear());
-            }
-        }
-    }
-
     public void printBookHeaders() {
         printBookInfo("TITLE", "AUTHOR", "YEAR");
         printBookInfo("-----", "------", "----");
     }
 
-    private void printBookInfo(String title, String author, String year) {
+    public void printMovieHeaders() {
+        printMovieInfo("NAME", "DIRECTOR", "YEAR", "RATING");
+        printMovieInfo("----", "--------", "----", "------");
+    }
+
+    public void printBookInfo(String title, String author, String year) {
         System.out.printf("%-20s %-20s %-15s %n", title, author, year);
     }
+
+    public void printMovieInfo(String name, String director, String year, String rating) {
+        System.out.printf("%-20s %-20s %s %-15s %n", name, director, year, rating);
+    }
+
+
+
+
 }

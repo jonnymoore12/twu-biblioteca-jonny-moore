@@ -14,6 +14,18 @@ public class ListBooks implements Command {
     }
 
     public void execute() {
-        library.listBooks();
+        listBooks();
+    }
+
+    public void listBooks() {
+        System.out.println("\n\nCheck out the list of books currently at Biblioteca:");
+
+        library.printBookHeaders();
+
+        for (Book book : library.getBooks()) {
+            if (book.isAvailable()) {
+                library.printBookInfo(book.getTitle(), book.getAuthor(), book.getYear());
+            }
+        }
     }
 }

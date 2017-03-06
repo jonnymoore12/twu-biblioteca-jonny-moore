@@ -1,15 +1,21 @@
 package com.twu.biblioteca;
 
+import java.util.HashMap;
+
 public class BibliotecaApp {
 
     private Library library = new Library();
     private UserAccount userAccount = new UserAccount();
     private static UserInput userInput = new UserInput();
+    private String userChoice = "";
+    private enum MenuItem { LIST_BOOKS, LIST_MOVIES};
+    private HashMap<String, Command> menuItemHashMap = new HashMap<String, Command>();
 
     public BibliotecaApp(Library library, UserAccount userAccount, UserInput userInput) {
         this.library = library;
         this.userAccount = userAccount;
         this.userInput = userInput;
+        populateMenuItemHashMap();
     }
 
     public BibliotecaApp(Library library, UserInput userInput) {
@@ -19,6 +25,7 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp(new Library(), new UserAccount(), new UserInput());
+//        bibliotecaApp.populateMenuItemHashMap();
         bibliotecaApp.welcomeMessage();
         bibliotecaApp.login();
         bibliotecaApp.topMenu();
@@ -47,6 +54,9 @@ public class BibliotecaApp {
     public void topMenu() {
         displayMenuOptions();
         getUserSelection();
+        executeMenuSelection();
+        // get rid of this later:
+        topMenu();
     }
 
     public void displayMenuOptions() {
@@ -63,39 +73,13 @@ public class BibliotecaApp {
         System.out.println("8. Quit");
     }
 
-    private void getUserSelection() {
-        switch (userInput.getStringInput()) {
-            case "1":
-                ListBooks listBooks = new ListBooks(library);
-                listBooks.execute();
-                break;
-            case "2":
-                listMovies();
-                break;
-            case "3":
-                checkoutBook();
-                break;
-            case "4":
-                checkoutMovie();
-                break;
-            case "5":
-                returnBook();
-                break;
-            case "6":
-                returnMovie();
-                break;
-            case "7":
-                showUserInfo();
-                break;
-            case "8":
-                quit();
-                System.exit(0);
-            default:
-                invalidSelection();;
-                getUserSelection();
-                break;
-        }
-        topMenu();
+    public void getUserSelection() {
+        userChoice = userInput.getStringInput();
+    }
+
+    public void executeMenuSelection() {
+        Command command = menuItemHashMap.get(userChoice);
+        command.execute();
     }
 
 //    private void getUserSelection() {
@@ -132,31 +116,6 @@ public class BibliotecaApp {
 //        }
 //        topMenu();
 //    }
-
-    public void listBooks() {
-
-        System.out.println("\n\nCheck out the list of books currently at Biblioteca:");
-
-        printBookHeaders();
-
-        for (Book book : library.getBooks()) {
-            if (book.isAvailable()) {
-                printBookInfo(book.getTitle(), book.getAuthor(), book.getYear());
-            }
-        }
-    }
-
-    public void listMovies() {
-        System.out.println("\n\nThese are the movies currently available at Biblioteca:");
-
-        printMovieHeaders();
-
-        for (Movie movie : library.getMovies()) {
-            if (movie.isAvailable()) {
-                printMovieInfo(movie.getName(), movie.getDirector(), movie.getYear(), movie.getRating());
-            }
-        }
-    }
 
     public void checkoutBook() {
         String bookTitle = promptUserForInput("\nPlease enter the TITLE of the book you wish to checkout. " +
@@ -219,6 +178,15 @@ public class BibliotecaApp {
         }
     }
 
+    public String getUserChoice() {
+        return userChoice;
+    }
+
+    private void populateMenuItemHashMap() {
+        menuItemHashMap.put("1", new ListBooks(library));
+        menuItemHashMap.put("2", new ListMovies(library));
+    }
+
     private String promptUserForInput(String prompt) {
         System.out.println(prompt);
         return userInput.getStringInput();
@@ -228,29 +196,9 @@ public class BibliotecaApp {
         System.out.println("\n\nYou have successfully checked out '" + title + "'. Thank you. Enjoy your " + type + "!");
     }
 
-    public void printBookHeaders() {
-        printBookInfo("TITLE", "AUTHOR", "YEAR");
-        printBookInfo("-----", "------", "----");
-    }
-
-    private void printMovieHeaders() {
-        printMovieInfo("NAME", "DIRECTOR", "YEAR", "RATING");
-        printMovieInfo("----", "--------", "----", "------");
-    }
-
-
-    private void printBookInfo(String title, String author, String year) {
-        System.out.printf("%-20s %-20s %-15s %n", title, author, year);
-    }
-
-    private void printMovieInfo(String name, String director, String year, String rating) {
-        System.out.printf("%-20s %-20s %s %-15s %n", name, director, year, rating);
-    }
-
     private void invalidSelection() {
         System.out.println("\nInvalid selection. Please select a valid option!");
     }
-
 
     public void showUserInfo() {
         userAccount.showCurrentUserInfo();
@@ -259,4 +207,5 @@ public class BibliotecaApp {
     public void quit() {
         System.out.println("Thanks for using Biblioteca. See you next time.");
     }
+
 }
