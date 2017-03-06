@@ -98,4 +98,25 @@ public class Library {
             }
         }
     }
+
+    public void listBooks() {
+        System.out.println("\n\nCheck out the list of books currently at Biblioteca:");
+
+        printBookHeaders();
+
+        for (Book book : books) {
+            if (book.isAvailable()) {
+                printBookInfo(book.getTitle(), book.getAuthor(), book.getYear());
+            }
+        }
+    }
+
+    public void printBookHeaders() {
+        printBookInfo("TITLE", "AUTHOR", "YEAR");
+        printBookInfo("-----", "------", "----");
+    }
+
+    private void printBookInfo(String title, String author, String year) {
+        System.out.printf("%-20s %-20s %-15s %n", title, author, year);
+    }
 }

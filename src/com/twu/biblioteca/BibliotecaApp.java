@@ -66,7 +66,8 @@ public class BibliotecaApp {
     private void getUserSelection() {
         switch (userInput.getStringInput()) {
             case "1":
-                listBooks();
+                ListBooks listBooks = new ListBooks(library);
+                listBooks.execute();
                 break;
             case "2":
                 listMovies();
@@ -96,6 +97,41 @@ public class BibliotecaApp {
         }
         topMenu();
     }
+
+//    private void getUserSelection() {
+//        switch (userInput.getStringInput()) {
+//            case "1":
+//                ListBooks listBooks = new ListBooks(library);
+//                listBooks.execute();
+//                break;
+//            case "2":
+//                listMovies();
+//                break;
+//            case "3":
+//                checkoutBook();
+//                break;
+//            case "4":
+//                checkoutMovie();
+//                break;
+//            case "5":
+//                returnBook();
+//                break;
+//            case "6":
+//                returnMovie();
+//                break;
+//            case "7":
+//                showUserInfo();
+//                break;
+//            case "8":
+//                quit();
+//                System.exit(0);
+//            default:
+//                invalidSelection();;
+//                getUserSelection();
+//                break;
+//        }
+//        topMenu();
+//    }
 
     public void listBooks() {
 
@@ -192,7 +228,7 @@ public class BibliotecaApp {
         System.out.println("\n\nYou have successfully checked out '" + title + "'. Thank you. Enjoy your " + type + "!");
     }
 
-    private void printBookHeaders() {
+    public void printBookHeaders() {
         printBookInfo("TITLE", "AUTHOR", "YEAR");
         printBookInfo("-----", "------", "----");
     }
