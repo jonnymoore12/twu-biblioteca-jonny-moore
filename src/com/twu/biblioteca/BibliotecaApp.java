@@ -117,33 +117,6 @@ public class BibliotecaApp {
 //        topMenu();
 //    }
 
-    public void checkoutBook() {
-        String bookTitle = promptUserForInput("\nPlease enter the TITLE of the book you wish to checkout. " +
-                                                                                 "(For main menu, enter: main menu).");
-        if (library.containsBook(bookTitle)) {
-            library.removeBook(bookTitle);
-            confirmSuccessfulCheckout("book", bookTitle);
-        } else if (bookTitle.contains("main menu")) {
-            topMenu();
-        } else {
-            invalidSelection();
-            checkoutBook();
-        }
-    }
-
-    public void checkoutMovie() {
-        String movieName = promptUserForInput("\nPlease enter the NAME of the movie you wish to checkout. " +
-                                                                                "(For main menu, enter: main menu).");
-        if (library.containsMovie(movieName)) {
-            library.removeMovie(movieName);
-            confirmSuccessfulCheckout("movie", movieName);
-        } else if (movieName.contains("main menu")) {
-            topMenu();
-        } else {
-            invalidSelection();
-            checkoutMovie();
-        }
-    }
 
     public void returnBook() {
         String bookTitle = promptUserForInput("\nPlease enter the title of the book you wish to return. " +
@@ -182,6 +155,7 @@ public class BibliotecaApp {
         menuItemHashMap.put("1", new ListBooks(library));
         menuItemHashMap.put("2", new ListMovies(library));
         menuItemHashMap.put("3", new CheckoutBook(library));
+        menuItemHashMap.put("4", new CheckoutMovie(library));
     }
 
     private String promptUserForInput(String prompt) {
