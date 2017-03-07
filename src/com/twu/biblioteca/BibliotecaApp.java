@@ -8,12 +8,6 @@ public class BibliotecaApp {
     private UserAccount userAccount = new UserAccount();
     private static UserInput userInput = new UserInput();
     private String userChoice = "";
-//    private enum MenuItem { LIST_BOOKS ("1"), LIST_MOVIES ("2");
-//                            String selection;
-//                            MenuItem(String s) {
-//                                selection = s;
-//                            }
-//                            };
     private HashMap<String, Command> menuItemHashMap = new HashMap<String, Command>();
 
     public BibliotecaApp(Library library, UserAccount userAccount, UserInput userInput) {
@@ -21,6 +15,7 @@ public class BibliotecaApp {
         this.userAccount = userAccount;
         this.userInput = userInput;
         populateMenuItemHashMap();
+
     }
 
     public BibliotecaApp(Library library, UserInput userInput) {
@@ -31,9 +26,9 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp(new Library(), new UserAccount(), new UserInput());
-//        bibliotecaApp.populateMenuItemHashMap();
         bibliotecaApp.welcomeMessage();
         bibliotecaApp.login();
+        bibliotecaApp.populateMenuItemHashMap();
         bibliotecaApp.topMenu();
     }
 
@@ -59,9 +54,8 @@ public class BibliotecaApp {
 
     public void topMenu() {
         displayMenuOptions();
-        getUserSelection();
+        getUserMenuSelection();
         executeMenuSelection();
-        // get rid of this later:
         topMenu();
     }
 
@@ -79,81 +73,13 @@ public class BibliotecaApp {
         System.out.println("8. Quit");
     }
 
-    public void getUserSelection() {
+    public void getUserMenuSelection() {
         userChoice = userInput.getStringInput();
     }
 
     public void executeMenuSelection() {
         Command command = menuItemHashMap.get(userChoice);
         command.execute();
-    }
-
-//    private void getUserSelection() {
-//        switch (userInput.getStringInput()) {
-//            case "1":
-//                ListBooks listBooks = new ListBooks(library);
-//                listBooks.execute();
-//                break;
-//            case "2":
-//                listMovies();
-//                break;
-//            case "3":
-//                checkoutBook();
-//                break;
-//            case "4":
-//                checkoutMovie();
-//                break;
-//            case "5":
-//                returnBook();
-//                break;
-//            case "6":
-//                returnMovie();
-//                break;
-//            case "7":
-//                showUserInfo();
-//                break;
-//            case "8":
-//                quit();
-//                System.exit(0);
-//            default:
-//                invalidSelection();;
-//                getUserSelection();
-//                break;
-//        }
-//        topMenu();
-//    }
-
-    public void returnBook() {
-        String bookTitle = promptUserForInput("\nPlease enter the title of the book you wish to return. " +
-                                                                            "For main menu, enter: main menu).");
-        if (library.bookWaitingToBeReturned(bookTitle)) {
-            library.returnBook(bookTitle);
-            System.out.println("\nThank you for returning '" + bookTitle + "'.");
-        } else if (library.containsBook(bookTitle)) {
-            System.out.println("\nThis book is already in the Biblioteca. You must have the wrong library!");
-        } else if (bookTitle.contains("main menu")) {
-            topMenu();
-        } else {
-            System.out.println("\nThat is not a valid book to return. Please try again.");
-            returnBook();
-        }
-    }
-
-    public void returnMovie() {
-        String movieName = promptUserForInput("\nPlease enter the name of the book you wish to return. " +
-                "For main menu, enter: main menu).");
-
-        if (library.movieWaitingToBeReturned(movieName)) {
-            library.returnMovie(movieName);
-            System.out.println("\nThank you for returning '" + movieName + "'.");
-        } else if (library.containsMovie(movieName)) {
-            System.out.println("\nThis movie is already in the Biblioteca. You must have the wrong library!");
-        } else if (movieName.contains("main menu")) {
-            topMenu();
-        } else {
-            System.out.println("That is not a valid movie to return! Please try again.");
-            returnMovie();
-        }
     }
 
     private void populateMenuItemHashMap() {
@@ -171,9 +97,4 @@ public class BibliotecaApp {
         System.out.println(prompt);
         return userInput.getStringInput();
     }
-
-    public void quit() {
-        System.out.println("Thanks for using Biblioteca. See you next time.");
-    }
-
 }

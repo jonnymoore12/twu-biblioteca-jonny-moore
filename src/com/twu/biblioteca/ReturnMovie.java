@@ -18,8 +18,7 @@ public class ReturnMovie implements Command {
     }
 
     public void execute() {
-        String movieTitle = promptUserForInput("\nPlease enter the title of the movie you wish to return. " +
-                "For main menu, enter: main menu).");
+        String movieTitle = promptUserForInput("\nPlease enter the title of the movie you wish to return");
         if (library.movieWaitingToBeReturned(movieTitle)) {
             library.returnMovie(movieTitle);
             System.out.println("\nThank you for returning '" + movieTitle + "'.");

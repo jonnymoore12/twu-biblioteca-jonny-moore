@@ -11,7 +11,7 @@ public class UserAccount {
 
     private List<User> users = new ArrayList(Arrays.asList(new User("Jonny", "jonny@mail.com",
             "5551234", "123-4567", "password")));
-    private User currentUser = new User("Jonny", "jonny@mail.com", "5551234", "123-4567", "password");
+    private User currentUser;
 
     public UserAccount(List<User> users) {
         this.users = users;
@@ -34,7 +34,7 @@ public class UserAccount {
         return false;
     }
 
-    public void logIn(User jonny) {
-        this.currentUser = jonny;
+    public void logIn(User user) {
+        this.currentUser = user;
     }
 }

@@ -18,8 +18,7 @@ public class ReturnBook implements Command {
     }
 
     public void execute() {
-        String bookTitle = promptUserForInput("\nPlease enter the title of the book you wish to return. " +
-                "For main menu, enter: main menu).");
+        String bookTitle = promptUserForInput("\nPlease enter the title of the book you wish to return.");
         if (library.bookWaitingToBeReturned(bookTitle)) {
             library.returnBook(bookTitle);
             System.out.println("\nThank you for returning '" + bookTitle + "'.");
