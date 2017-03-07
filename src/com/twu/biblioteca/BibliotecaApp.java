@@ -7,7 +7,6 @@ public class BibliotecaApp {
     private Library library = new Library();
     private UserAccount userAccount = new UserAccount();
     private static UserInput userInput = new UserInput();
-    private String userChoice = "";
     private HashMap<String, Command> menuItemHashMap = new HashMap<String, Command>();
 
     public BibliotecaApp(Library library, UserAccount userAccount, UserInput userInput) {
@@ -15,7 +14,6 @@ public class BibliotecaApp {
         this.userAccount = userAccount;
         this.userInput = userInput;
         populateMenuItemHashMap();
-
     }
 
     public BibliotecaApp(Library library, UserInput userInput) {
@@ -54,8 +52,8 @@ public class BibliotecaApp {
 
     public void topMenu() {
         displayMenuOptions();
-        getUserMenuSelection();
-        executeMenuSelection();
+        String choice = getUserMenuSelection();
+        executeMenuSelection(choice);
         topMenu();
     }
 
@@ -73,12 +71,12 @@ public class BibliotecaApp {
         System.out.println("8. Quit");
     }
 
-    public void getUserMenuSelection() {
-        userChoice = userInput.getStringInput();
+    public String getUserMenuSelection() {
+        return userInput.getStringInput();
     }
 
-    public void executeMenuSelection() {
-        Command command = menuItemHashMap.get(userChoice);
+    public void executeMenuSelection(String choice) {
+        Command command = menuItemHashMap.get(choice);
         command.execute();
     }
 
