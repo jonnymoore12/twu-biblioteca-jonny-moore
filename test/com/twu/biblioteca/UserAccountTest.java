@@ -43,23 +43,6 @@ public class UserAccountTest {
     }
 
     @Test
-    public void showCurrentUserInfo_displaysUserInfoForCurrentUser() {
-        account.logIn(jonny);
-        account.showCurrentUserInfo();
-        assertTrue(outContent.toString().contains("Jonny"));
-        assertTrue(outContent.toString().contains("jonny@mail.com"));
-        assertTrue(outContent.toString().contains("5551234"));
-    }
-
-    @Test
-    public void showCurrentUserInfo_doesNotDisplayInfoForNonLoggedInUsers() {
-        accountTwoUsers.logIn(leo);
-        accountTwoUsers.showCurrentUserInfo();
-        assertTrue(outContent.toString().contains("leo@mail.com"));
-        assertFalse(outContent.toString().contains("jonny@mail.com"));
-    }
-
-    @Test
     public void verifyLogin_returnsFalseIfLibraryNumberAndPasswordDoNotMatch() {
         assertFalse(account.verifyLogin("123-4567", "wrong, very wrong password"));
     }
