@@ -57,5 +57,4 @@ public class UserAccountTest {
         System.setOut(null);
         System.setErr(null);
     }
-
 }

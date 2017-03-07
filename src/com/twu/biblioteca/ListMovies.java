@@ -26,5 +26,4 @@ public class ListMovies implements Command {
             }
         }
     }
-
 }

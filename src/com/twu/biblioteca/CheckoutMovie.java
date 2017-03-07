@@ -39,5 +39,4 @@ public class CheckoutMovie implements Command {
     private void invalidSelection() {
         System.out.println("\nInvalid selection. Please select a valid option!");
     }
-
 }

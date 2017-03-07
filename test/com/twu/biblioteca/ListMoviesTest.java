@@ -47,5 +47,4 @@ public class ListMoviesTest {
         listMovies.execute();
         assertFalse(outContent.toString().contains("The Great Gatsby"));
     }
-
 }

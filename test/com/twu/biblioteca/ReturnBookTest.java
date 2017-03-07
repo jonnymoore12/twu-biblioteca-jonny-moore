@@ -66,5 +66,4 @@ public class ReturnBookTest {
         mockedReturnBook.execute();
         assertTrue(outContent.toString().contains("That is not a valid book to return. Please try again."));
     }
-
 }

@@ -9,5 +9,4 @@ public class Quit implements Command {
         System.out.println("Thanks for using Biblioteca. See you next time.");
         System.exit(0);
     }
-
 }

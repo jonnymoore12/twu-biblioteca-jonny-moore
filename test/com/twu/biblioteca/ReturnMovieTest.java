@@ -66,5 +66,4 @@ public class ReturnMovieTest {
         mockedReturnMovie.execute();
         assertTrue(outContent.toString().contains("That is not a valid movie to return. Please try again."));
     }
-
 }

@@ -76,7 +76,6 @@ public class BibliotecaApp {
     }
 
     public void executeMenuSelection(String choice) {
-
         Command command = menuItemHashMap.get(choice);
         command.execute();
     }

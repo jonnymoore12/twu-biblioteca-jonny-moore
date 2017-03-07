@@ -34,5 +34,4 @@ public class DisplayUserInfoTest {
         assertTrue(outContent.toString().contains("jonny@mail.com"));
         assertTrue(outContent.toString().contains("5551234"));
     }
-
 }

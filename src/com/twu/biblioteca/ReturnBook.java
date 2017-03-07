@@ -34,5 +34,4 @@ public class ReturnBook implements Command {
         System.out.println(prompt);
         return userInput.getStringInput();
     }
-
 }

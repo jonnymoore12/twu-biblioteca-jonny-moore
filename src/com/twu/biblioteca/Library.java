@@ -116,8 +116,4 @@ public class Library {
     public void printMovieInfo(String name, String director, String year, String rating) {
         System.out.printf("%-20s %-20s %s %-15s %n", name, director, year, rating);
     }
-
-
-
-
 }

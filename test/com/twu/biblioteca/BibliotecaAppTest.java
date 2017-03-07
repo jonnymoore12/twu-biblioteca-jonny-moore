@@ -88,14 +88,6 @@ public class BibliotecaAppTest {
         assertTrue(outContent.toString().contains("Chungking Express"));
     }
 
-//    @Test
-//    public void executeMenuSelection_checkoutBooks_promptsUsersForInput() {
-//        when(mockedUserInput.getStringInput()).thenReturn("3").thenReturn("Brave New World");
-//        String menuChoice = mockedBiblioteca.getUserMenuSelection();
-//        mockedBiblioteca.executeMenuSelection(menuChoice);
-//        assertTrue(outContent.toString().contains("Please enter the TITLE of the book you wish to checkout"));
-//    }
-
     @After
     public void cleanUpStreams() {
         System.setOut(null);

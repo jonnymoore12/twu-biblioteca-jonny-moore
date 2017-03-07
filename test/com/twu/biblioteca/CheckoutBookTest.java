@@ -61,5 +61,4 @@ public class CheckoutBookTest {
         newMockedCheckoutBook.execute();
         assertFalse(newLibrary.containsBook("Lolita"));
     }
-
 }
