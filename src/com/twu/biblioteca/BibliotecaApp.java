@@ -8,7 +8,12 @@ public class BibliotecaApp {
     private UserAccount userAccount = new UserAccount();
     private static UserInput userInput = new UserInput();
     private String userChoice = "";
-//    private enum MenuItem { LIST_BOOKS, LIST_MOVIES};
+//    private enum MenuItem { LIST_BOOKS ("1"), LIST_MOVIES ("2");
+//                            String selection;
+//                            MenuItem(String s) {
+//                                selection = s;
+//                            }
+//                            };
     private HashMap<String, Command> menuItemHashMap = new HashMap<String, Command>();
 
     public BibliotecaApp(Library library, UserAccount userAccount, UserInput userInput) {
@@ -21,6 +26,7 @@ public class BibliotecaApp {
     public BibliotecaApp(Library library, UserInput userInput) {
         this.library = library;
         this.userInput = userInput;
+        populateMenuItemHashMap();
     }
 
     public static void main(String[] args) {
@@ -117,7 +123,6 @@ public class BibliotecaApp {
 //        topMenu();
 //    }
 
-
     public void returnBook() {
         String bookTitle = promptUserForInput("\nPlease enter the title of the book you wish to return. " +
                                                                             "For main menu, enter: main menu).");
@@ -156,23 +161,14 @@ public class BibliotecaApp {
         menuItemHashMap.put("2", new ListMovies(library));
         menuItemHashMap.put("3", new CheckoutBook(library));
         menuItemHashMap.put("4", new CheckoutMovie(library));
+        menuItemHashMap.put("5", new ReturnBook(library));
+        menuItemHashMap.put("6", new ReturnMovie(library));
+        menuItemHashMap.put("7", new DisplayUserInfo(userAccount.getCurrentUser()));
     }
 
     private String promptUserForInput(String prompt) {
         System.out.println(prompt);
         return userInput.getStringInput();
-    }
-
-    private void confirmSuccessfulCheckout(String type, String title) {
-        System.out.println("\n\nYou have successfully checked out '" + title + "'. Thank you. Enjoy your " + type + "!");
-    }
-
-    private void invalidSelection() {
-        System.out.println("\nInvalid selection. Please select a valid option!");
-    }
-
-    public void showUserInfo() {
-        userAccount.showCurrentUserInfo();
     }
 
     public void quit() {
