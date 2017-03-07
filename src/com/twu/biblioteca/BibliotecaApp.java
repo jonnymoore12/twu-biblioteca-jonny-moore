@@ -164,6 +164,7 @@ public class BibliotecaApp {
         menuItemHashMap.put("5", new ReturnBook(library));
         menuItemHashMap.put("6", new ReturnMovie(library));
         menuItemHashMap.put("7", new DisplayUserInfo(userAccount.getCurrentUser()));
+        menuItemHashMap.put("8", new Quit());
     }
 
     private String promptUserForInput(String prompt) {
